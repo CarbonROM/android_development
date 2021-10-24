@@ -77,7 +77,7 @@ def usage(error=None):
 """ % sys.argv[0]
 
     if error:
-        print >>sys.stderr, "Error:", error
+        print("Error:", error, file=sys.stderr)
 
 
 # Parse command line args, returns a Params instance or sys.exit(2) on error
@@ -190,7 +190,7 @@ def copy(p, filepath, dest_pkg):
         verbose("Ignore duplicate archive path %s", arc_path)
     USED_ARC_PATH[arc_path] = 1
     if p.DRY:
-        print >>sys.stderr, "zip %s [%s]" % (arc_path, filepath)
+        print("zip %s [%s]" % (arc_path, filepath), file=sys.stderr)
     elif p.zipfile is not None:
         if p.EXEC_ZIP:
             # zipfile is a path. Copy to it.
@@ -247,11 +247,11 @@ def main():
     finally:
         if z is not None:
             z.close()
-    print "%s: %d java files copied" % (p.DST, p.CNT_USED)
+    print("%s: %d java files copied" % (p.DST, p.CNT_USED))
     if p.CNT_NOPKG:
-        print "%s: %d java files ignored" % (p.DST, p.CNT_NOPKG)
+        print("%s: %d java files ignored" % (p.DST, p.CNT_NOPKG))
     if p.DRY:
-        print >>sys.stderr, "This was in *DRY* mode. No copies done."
+        print("This was in *DRY* mode. No copies done.", file=sys.stderr)
 
 
 if __name__ == "__main__":
